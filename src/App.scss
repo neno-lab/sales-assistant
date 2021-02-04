@@ -1,0 +1,17 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'eina';
+  src: url('./assests/Eina01-Regular.ttf') format('truetype');
+}
+
+body {
+  font-family: 'eina';
+  min-height: 100vh;
+  background: linear-gradient(to right top, #e0ad56, #f9ce5c);
+  color: #1f1e1c;
+}

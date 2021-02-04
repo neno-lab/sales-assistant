@@ -1,0 +1,16 @@
+@import '../../root-colors.scss';
+
+footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background: $dark;
+  display: flex;
+  justify-content: center;
+
+  div {
+    color: #6b6b6b;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}

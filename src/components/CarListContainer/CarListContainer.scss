@@ -1,0 +1,36 @@
+@import '../../root-colors.scss';
+
+.car-list-container {
+  height: 840px; // jel moguce kako stavit height od div-a do div-a?
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 1400px;
+    list-style: none;
+    margin-top: 180px;
+
+    li {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 250px;
+      height: 250px;
+      background: linear-gradient(to left top, #f5f7fa, #b8c6db);
+      border-radius: 20px;
+      box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.267);
+      margin: 20px;
+      //   cursor: pointer;
+
+      i {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  }
+}

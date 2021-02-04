@@ -1,0 +1,74 @@
+@import '../../root-colors.scss';
+
+@font-face {
+  font-family: 'eina';
+  src: url('../../assests/Eina01-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+.nav-div {
+  width: 100%;
+  color: $white;
+  background: $dark;
+  height: 5.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .header-holder {
+    background: $dark;
+    height: 100%;
+    width: 1400px;
+    display: flex;
+    justify-content: space-between;
+
+    .logo {
+      background-color: transparent;
+      background-image: url('../../assests/logo.png');
+      background-repeat: no-repeat;
+      width: 250px;
+      height: 100px;
+      margin-top: -35px;
+      cursor: pointer;
+    }
+
+    .credentials {
+      display: flex;
+      justify-content: center;
+      .registration {
+        color: $white;
+        font-family: 'eina';
+        font-weight: bold;
+        background: transparent;
+        border: 3px solid $lambo;
+        border-radius: 50px;
+        margin-right: 3.5rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        width: 180px;
+        outline: none;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .login {
+        color: $dark;
+        font-family: 'eina';
+        font-weight: bold;
+        background: $lambo;
+        border: none;
+        border-radius: 50px;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        width: 120px;
+        outline: none;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

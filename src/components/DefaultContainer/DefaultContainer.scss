@@ -1,0 +1,89 @@
+@import '../../root-colors.scss';
+
+@font-face {
+  font-family: 'eina';
+  src: url('../../assests/Eina01-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'eina';
+  src: url('../../assests/Eina01-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'eina';
+  src: url('../../assests/Eina01-Bold.ttf') format('truetype');
+}
+
+.default-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    font-family: 'eina';
+    font-size: 2.2em;
+    font-weight: normal;
+    margin-top: 40px;
+  }
+
+  h1 {
+    font-family: 'eina';
+    font-size: 2.8rem;
+    letter-spacing: 10px;
+    font-weight: bold;
+    margin-top: 60px;
+  }
+
+  .cards {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 130px;
+    width: 1200px;
+    .card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 330px;
+      height: 250px;
+      background: linear-gradient(to left top, #f5f7fa, #b8c6db);
+      border-radius: 20px;
+      box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.267);
+      cursor: pointer;
+
+      h3 {
+        font-size: 1.4rem;
+        margin-top: 30px;
+        font-family: 'eina';
+        font-weight: normal;
+        color: $dark;
+      }
+
+      .img-hatchback {
+        background-image: url('../../assests/hatchback.png');
+        background-repeat: no-repeat;
+        margin-top: 60px;
+        width: 250px;
+        height: 150px;
+      }
+
+      .img-sedan {
+        background-image: url('../../assests/sedan.png');
+        background-repeat: no-repeat;
+        margin-top: 60px;
+        width: 215px;
+        height: 150px;
+      }
+
+      .img-suv {
+        background-image: url('../../assests/suv.png');
+        background-repeat: no-repeat;
+        margin-top: 60px;
+        width: 190px;
+        height: 150px;
+      }
+    }
+  }
+}

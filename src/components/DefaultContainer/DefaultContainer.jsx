@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import TeamDSalesAssistant from '../../api/TeamDSalesAssistant';
+// import TeamDSalesAssistant from '../../api/TeamDSalesAssistant';
 import './DefaultContainer.scss';
 
 const DefaultContainer = () => {

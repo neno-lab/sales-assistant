@@ -1,48 +1,26 @@
 import React, { useState } from 'react';
-import Login from '../Login/Login';
-import Registration from '../Registration/Registration';
+import LogRegBtns from '../LogRegBtns/LogRegBtns';
+import HiUserName from '../HiUserName/HiUserName';
+import { connect } from 'react-redux';
 import './Header.scss';
 
-const Header = () => {
-  // const [token, setToken] = useState();
-  const [isOpenModalLogin, setIsOpenModalLogin] = useState(false);
-  const [isOpenModalRegistration, setIsOpenModalRegistration] = useState(false);
-
-  const onClickLogin = (e) => {
-    e.preventDefault();
-    setIsOpenModalLogin(true);
-  };
-
-  const onClickRegistration = (e) => {
-    e.preventDefault();
-    setIsOpenModalRegistration(true);
-  };
-
+const Header = ({ loginProps }) => {
   return (
-    <>
-      <div className='nav-div'>
-        <div className='header-holder'>
-          <div className='logo'></div>
-          <div className='credentials'>
-            <button className='registration' onClick={onClickRegistration}>
-              REGISTRATION
-            </button>
-            <button className='login' onClick={onClickLogin}>
-              LOG IN
-            </button>
-          </div>
+    <div className='nav-div'>
+      <div className='header-holder'>
+        <div className='logo'></div>
+        <div className='credentials'>
+          {loginProps.username === '' ? <LogRegBtns /> : <HiUserName />}
         </div>
       </div>
-      <Login
-        open={isOpenModalLogin}
-        onClose={() => setIsOpenModalLogin(false)}
-      />
-      <Registration
-        open={isOpenModalRegistration}
-        onClose={() => setIsOpenModalRegistration(false)}
-      />
-    </>
+    </div>
   );
 };
 
-export default Header;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    loginProps: state.reducer.loginProps,
+  };
+};
+
+export default connect(mapStateToProps, null)(Header);

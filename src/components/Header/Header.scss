@@ -47,8 +47,10 @@
         margin-bottom: 1.5rem;
         width: 180px;
         outline: none;
+        transition: 0.25s ease;
 
         &:hover {
+          box-shadow: 0 4px 10px 0 rgba(199, 199, 199, 0.39);
           cursor: pointer;
         }
       }
@@ -64,8 +66,10 @@
         margin-bottom: 1.5rem;
         width: 120px;
         outline: none;
+        transition: 0.25s ease;
 
         &:hover {
+          box-shadow: 0 4px 10px 0 rgba(199, 199, 199, 0.39);
           cursor: pointer;
         }
       }

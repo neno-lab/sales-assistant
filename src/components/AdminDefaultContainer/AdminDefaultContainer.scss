@@ -1,0 +1,150 @@
+@import '../../root-colors.scss';
+
+@font-face {
+  font-family: 'eina';
+  src: url('../../assests/Eina01-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+.admin-default-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 1450px;
+  margin: 0 auto;
+  margin-top: 50px;
+
+  .users-cars {
+    display: flex;
+    width: calc(1450px - 800px);
+    // background-color: #f3f3f3;
+    background-color: transparent;
+    border: $dark 3px solid;
+    border-radius: 20px;
+
+    margin-bottom: 70px;
+
+    .users {
+      color: $dark;
+      flex: 1;
+      text-align: center;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      padding: 8px 0px 8px;
+      transition: 0.25s ease;
+      font-weight: bold;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #ffffff4d;
+      }
+    }
+
+    .cars {
+      color: $dark;
+      border-left: $dark solid 3px;
+      flex: 1;
+      text-align: center;
+      line-height: 20px;
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+      padding: 8px 0px 8px;
+      transition: 0.25s ease;
+      font-weight: bold;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #ffffff4d;
+      }
+    }
+  }
+
+  .add-icon {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+
+    .fas {
+      font-size: 45px;
+      color: $dark;
+
+      &:hover {
+        filter: drop-shadow(0px 0px 0.7px #454545);
+        cursor: pointer;
+      }
+    }
+  }
+
+  .content-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+    thead {
+      .row-title {
+        background-color: $dark;
+        color: $white;
+        text-align: left;
+        font-weight: bold;
+        padding: 12px 15px;
+
+        .title {
+          padding: 12px 15px;
+          text-align: center;
+        }
+      }
+    }
+
+    tbody {
+      text-align: center;
+      .row-item {
+        border-bottom: 1px solid #dddddd;
+        background-color: $white;
+
+        &:nth-last-of-type(even) {
+          background-color: #f3f3f3;
+        }
+
+        &:last-of-type {
+          border-bottom: 2px solid $dark;
+        }
+        .item {
+          padding: 12px 15px;
+
+          .edit-btn {
+            border: none;
+            background-color: $blue;
+            border-radius: 20px;
+            color: $white;
+            padding: 10px 30px 10px;
+            transition: 0.25s ease;
+
+            &:hover {
+              box-shadow: 0 4px 10px 0 rgba(40, 40, 194, 0.39);
+              cursor: pointer;
+            }
+          }
+
+          .delete-btn {
+            border: none;
+            background-color: $red;
+            border-radius: 20px;
+            color: $white;
+            padding: 10px 30px 10px;
+            transition: 0.25s ease;
+
+            &:hover {
+              box-shadow: 0 4px 10px 0 rgba(40, 40, 194, 0.39);
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}

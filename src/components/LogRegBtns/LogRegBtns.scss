@@ -1,0 +1,42 @@
+@import '../../root-colors.scss';
+
+@font-face {
+  font-family: 'eina';
+  src: url('../../assests/Eina01-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+.registration {
+  color: $white;
+  font-family: 'eina';
+  font-weight: bold;
+  background: transparent;
+  border: 3px solid $lambo;
+  border-radius: 50px;
+  margin-right: 3.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  width: 180px;
+  outline: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.login {
+  color: $dark;
+  font-family: 'eina';
+  font-weight: bold;
+  background: $lambo;
+  border: none;
+  border-radius: 50px;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  width: 120px;
+  outline: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

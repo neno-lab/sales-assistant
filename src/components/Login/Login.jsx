@@ -1,35 +1,49 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { login } from '../../redux/actions/actions';
 import './Login.scss';
-import TeamDSalesAssistant from '../../api/TeamDSalesAssistant';
+// import TeamDSalesAssistant from '../../api/TeamDSalesAssistant';
 
-const Login = ({ open, onClose }) => {
+const Login = ({ open, onClose, login, loginProps }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    const params = new URLSearchParams();
-    params.append('username', username);
-    params.append('password', password);
-    params.append('grant_type', 'password');
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    };
-
-    try {
-      const response = await TeamDSalesAssistant.post('/login', params, config);
-      console.log(response);
-    } catch (err) {
-      console.error(err.message);
-    }
-
-    console.log(username);
-    console.log(password);
+    login({ username: username, password: password });
+    console.log('tu sam');
+    setUsername('');
+    setPassword('');
+    onClose();
   };
+
+  console.log('loginProps: ', loginProps);
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   const params = new URLSearchParams();
+  //   params.append('username', username);
+  //   params.append('password', password);
+  //   params.append('grant_type', 'password');
+
+  //   const config = {
+  //     headers: {
+  //       'Content-Type': 'application/x-www-form-urlencoded',
+  //     },
+  //   };
+
+  //   try {
+  //     const response = await TeamDSalesAssistant.post('/login', params, config);
+  //     console.log(response);
+  //   } catch (err) {
+  //     console.error(err.message);
+  //   }
+
+  //   console.log(username);
+  //   console.log(password);
+  // };
 
   const onChangeUsername = (e) => {
     setUsername(e.target.value);
@@ -75,4 +89,16 @@ const Login = ({ open, onClose }) => {
   );
 };
 
-export default Login;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    loginProps: state.reducer.loginProps,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: bindActionCreators(login, dispatch),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

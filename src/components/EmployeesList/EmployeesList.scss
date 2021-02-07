@@ -1,0 +1,95 @@
+@import '../../root-colors.scss';
+
+@font-face {
+  font-family: 'eina';
+  src: url('../../assests/Eina01-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+.content-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+  thead {
+    .row-title {
+      background-color: $dark;
+      color: $white;
+      text-align: left;
+      font-weight: bold;
+      padding: 12px 15px;
+
+      .title {
+        padding: 12px 15px;
+        text-align: center;
+      }
+    }
+  }
+
+  tbody {
+    text-align: center;
+    .row-item {
+      border-bottom: 1px solid #dddddd;
+      background-color: $white;
+
+      &:nth-last-of-type(even) {
+        background-color: #f3f3f3;
+      }
+
+      &:last-of-type {
+        border-bottom: 2px solid $dark;
+      }
+      .item {
+        padding: 12px 15px;
+
+        .edit-btn {
+          border: none;
+          background-color: $blue;
+          border-radius: 20px;
+          color: $white;
+          padding: 10px 30px 10px;
+          transition: 0.25s ease;
+
+          &:hover {
+            box-shadow: 0 4px 10px 0 rgba(40, 40, 194, 0.39);
+            cursor: pointer;
+          }
+        }
+
+        .delete-btn {
+          border: none;
+          background-color: $red;
+          border-radius: 20px;
+          color: $white;
+          padding: 10px 30px 10px;
+          transition: 0.25s ease;
+
+          &:hover {
+            box-shadow: 0 4px 10px 0 rgba(40, 40, 194, 0.39);
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
+
+.add-icon {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+
+  .fas {
+    font-size: 45px;
+    color: $dark;
+
+    &:hover {
+      filter: drop-shadow(0px 0px 0.7px #454545);
+      cursor: pointer;
+    }
+  }
+}

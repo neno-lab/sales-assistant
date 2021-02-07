@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import AdminEmployeeCars from '../AdminEmployeeCars/AdminEmployeeCars';
-import AdminUsersList from '../AdminUsersList/AdminUsersList';
+import CarModelTypes from '../CarModelTypes/CarModelTypes';
+import EmployeesCustomers from '../EmployeesCustomers/EmployeesCustomers';
 import './AdminDefaultContainer.scss';
 
 const AdminDefaultContainer = () => {
@@ -35,8 +35,8 @@ const AdminDefaultContainer = () => {
         </div>
       </div>
 
-      {isActiveUsers ? <AdminUsersList /> : null}
-      {isActiveCars ? <AdminEmployeeCars /> : null}
+      {isActiveUsers ? <EmployeesCustomers /> : null}
+      {isActiveCars ? <CarModelTypes /> : null}
     </div>
   );
 };

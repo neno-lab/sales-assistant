@@ -1,9 +1,12 @@
 import React from 'react';
-import './AdminUsersList.scss';
+import './EmployeesList.scss';
 
-const AdminUsers = () => {
+const EmployeesList = () => {
   return (
     <>
+      <div className='add-icon'>
+        <i className='fas fa-plus-circle'></i>
+      </div>
       <table className='content-table'>
         <thead>
           <tr className='row-title'>
@@ -66,4 +69,4 @@ const AdminUsers = () => {
   );
 };
 
-export default AdminUsers;
+export default EmployeesList;

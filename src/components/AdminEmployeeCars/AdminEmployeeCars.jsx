@@ -1,7 +1,7 @@
 import React from 'react';
 import './AdminEmployeeCars.scss';
 
-const AdminEmployeeCarsCrud = () => {
+const AdminEmployeeCars = () => {
   return (
     <>
       <div className='add-icon'>
@@ -89,9 +89,8 @@ const AdminEmployeeCarsCrud = () => {
           </tr>
         </tbody>
       </table>
-      ;
     </>
   );
 };
 
-export default AdminEmployeeCarsCrud;
+export default AdminEmployeeCars;

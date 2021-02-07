@@ -1,0 +1,66 @@
+@import '../../root-colors.scss';
+
+@font-face {
+  font-family: 'eina';
+  src: url('../../assests/Eina01-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+.employee-default-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 1450px;
+  margin: 0 auto;
+  margin-top: 50px;
+
+  .cars-btn {
+    display: flex;
+    width: calc(1450px - 800px);
+    background-color: transparent;
+    border: $dark 3px solid;
+    border-radius: 20px;
+    margin-bottom: 70px;
+  }
+
+  .cars {
+    color: $dark;
+    flex: 1;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 20px;
+    padding: 8px 0px 8px;
+    transition: 0.25s ease;
+    font-weight: bold;
+
+    &.active {
+      background-color: $white;
+
+      &:hover {
+        background-color: $white;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffffff4d;
+    }
+  }
+}
+
+.add-icon {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+
+  .fas {
+    font-size: 45px;
+    color: $dark;
+
+    &:hover {
+      filter: drop-shadow(0px 0px 0.7px #454545);
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,92 @@
+@import '../../root-colors.scss';
+
+@font-face {
+  font-family: 'eina';
+  src: url('../../assests/Eina01-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+.car-model-types {
+  display: flex;
+  width: calc(1450px - 800px);
+  background-color: transparent;
+  border: $dark 3px solid;
+  border-radius: 20px;
+  margin-bottom: 70px;
+
+  .hatchback {
+    color: $dark;
+    flex: 1;
+    text-align: center;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding: 2px 0px 2px;
+    transition: 0.25s ease;
+    font-weight: bold;
+
+    &.active {
+      background-color: $white;
+
+      &:hover {
+        background-color: $white;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffffff4d;
+    }
+  }
+
+  .sedan {
+    color: $dark;
+    border-left: $dark solid 3px;
+    flex: 1;
+    text-align: center;
+    line-height: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 2px 0px 2px;
+    transition: 0.25s ease;
+    font-weight: bold;
+
+    &.active {
+      background-color: $white;
+
+      &:hover {
+        background-color: $white;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffffff4d;
+    }
+  }
+
+  .suv {
+    color: $dark;
+    border-left: $dark solid 3px;
+    flex: 1;
+    text-align: center;
+    line-height: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 2px 0px 2px;
+    transition: 0.25s ease;
+    font-weight: bold;
+
+    &.active {
+      background-color: $white;
+
+      &:hover {
+        background-color: $white;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffffff4d;
+    }
+  }
+}

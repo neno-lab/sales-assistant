@@ -1,13 +1,13 @@
 import React from 'react';
-// import AdminDefaultContainer from '../components/AdminDefaultContainer/AdminDefaultContainer';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
+import EmployeeDefaultContainer from '../components/EmployeeDefaultContainer/EmployeeDefaultContainer';
 
 const Employee = () => {
   return (
     <>
       <Header />
-      <h1>neno</h1>
+      <EmployeeDefaultContainer />
       <Footer />
     </>
   );

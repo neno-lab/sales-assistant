@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './AddUser.scss';
+import './AddCar.scss';
 
 const AddUser = () => {
   const [username, setUsername] = useState('');

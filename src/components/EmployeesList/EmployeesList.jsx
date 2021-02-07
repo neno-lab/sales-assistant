@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
+import AddEmployee from '../AddEmployee/AddEmployee';
 import './EmployeesList.scss';
 
 const EmployeesList = () => {
+  const [isOpenModalAddEmployee, setIsOpenModalEmplyee] = useState(false);
+
+  const onClickPlus = () => {
+    // console.log('neno');
+    setIsOpenModalEmplyee(true);
+  };
+
   return (
     <>
       <div className='add-icon'>
-        <i className='fas fa-plus-circle'></i>
+        <i className='fas fa-plus-circle' onClick={onClickPlus}></i>
       </div>
       <table className='content-table'>
         <thead>
@@ -65,6 +73,10 @@ const EmployeesList = () => {
           </tr>
         </tbody>
       </table>
+      <AddEmployee
+        open={isOpenModalAddEmployee}
+        onClose={() => setIsOpenModalEmplyee(false)}
+      />
     </>
   );
 };

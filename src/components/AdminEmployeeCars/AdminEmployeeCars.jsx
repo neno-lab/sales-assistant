@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import AddCar from '../AddCar/AddCar';
+import { connect } from 'react-redux';
 import './AdminEmployeeCars.scss';
 
 const AdminEmployeeCars = () => {
@@ -105,4 +106,12 @@ const AdminEmployeeCars = () => {
   );
 };
 
-export default AdminEmployeeCars;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    hatchbacksList: state.reducer.hatchbacksList,
+    sedansList: state.reducer.sedansList,
+    suvsList: state.reducer.suvsList,
+  };
+};
+
+export default connect(mapStateToProps, null)(AdminEmployeeCars);

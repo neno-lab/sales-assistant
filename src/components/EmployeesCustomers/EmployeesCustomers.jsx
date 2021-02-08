@@ -1,21 +1,54 @@
 import React, { useState } from 'react';
 import CustomersList from '../CustomersList/CustomersList';
 import EmployeesList from '../EmployeesList/EmployeesList';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import './EmployeesCustomers.scss';
+import TeamDSalesAssistant from '../../api/TeamDSalesAssistant';
+import { getAllCustomers, getAllEmployees } from '../../redux/actions/actions';
 
-const EmployeesCustomers = () => {
+const EmployeesCustomers = ({
+  loginProps,
+  getAllEmployees,
+  getAllCustomers,
+}) => {
   const [isActiveEmployees, setIsActiveEmployees] = useState(false);
   const [isActiveCustomers, setIsActiveCustomers] = useState(false);
   let active = 'active';
-
-  const handleOnClickEmpoyees = () => {
-    setIsActiveEmployees(true);
-    setIsActiveCustomers(false);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${loginProps.token}`,
+    },
   };
 
-  const handleOnClickCustomers = () => {
-    setIsActiveEmployees(false);
-    setIsActiveCustomers(true);
+  const handleOnClickEmpoyees = async () => {
+    try {
+      const response = await TeamDSalesAssistant.get(
+        '/api/users/admin',
+        config
+      );
+      console.log(response);
+      getAllEmployees(response.data.EmployeesList);
+      setIsActiveEmployees(true);
+      setIsActiveCustomers(false);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const handleOnClickCustomers = async () => {
+    try {
+      const response = await TeamDSalesAssistant.get(
+        '/api/users/admin',
+        config
+      );
+      console.log(response);
+      getAllCustomers(response.data.CustomersList);
+      setIsActiveEmployees(false);
+      setIsActiveCustomers(true);
+    } catch (err) {
+      console.log(err.message);
+    }
   };
   return (
     <>
@@ -40,4 +73,17 @@ const EmployeesCustomers = () => {
   );
 };
 
-export default EmployeesCustomers;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    loginProps: state.reducer.loginProps,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getAllEmployees: bindActionCreators(getAllEmployees, dispatch),
+    getAllCustomers: bindActionCreators(getAllCustomers, dispatch),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeesCustomers);

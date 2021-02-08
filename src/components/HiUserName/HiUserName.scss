@@ -1,3 +1,19 @@
+@import '../../root-colors.scss';
+
 .hi {
   margin-top: 1.5rem;
+  font-size: 20px;
+  color: $white;
+}
+
+.fas {
+  margin-left: 35px;
+  margin-top: 30px;
+  font-size: 20px;
+  color: $white;
+
+  &:hover {
+    filter: drop-shadow(0px 0px 1px #9b9b9b);
+    cursor: pointer;
+  }
 }

@@ -1,7 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './CustomersList.scss';
 
-const CustomersList = () => {
+const CustomersList = ({ customersList }) => {
   return (
     <table className='content-table'>
       <thead>
@@ -16,42 +17,28 @@ const CustomersList = () => {
         </tr>
       </thead>
       <tbody>
-        <tr className='row-item'>
-          <td className='item'>1</td>
-          <td className='item'>Ana</td>
-          <td className='item'>Anic</td>
-          <td className='item'>anaanic</td>
-          <td className='item'>ana@gmail.com</td>
-          <td className='item'>Customer</td>
-          <td className='item'>
-            <button className='delete-btn'>Delete</button>
-          </td>
-        </tr>
-        <tr className='row-item'>
-          <td className='item'>2</td>
-          <td className='item'>Neno</td>
-          <td className='item'>Zidic</td>
-          <td className='item'>nenozidic</td>
-          <td className='item'>neno@gmail.com</td>
-          <td className='item'>Employee</td>
-          <td className='item'>
-            <button className='delete-btn'>Delete</button>
-          </td>
-        </tr>
-        <tr className='row-item'>
-          <td className='item'>3</td>
-          <td className='item'>Dara</td>
-          <td className='item'>Daric</td>
-          <td className='item'>daradaric</td>
-          <td className='item'>dara@gmail.com</td>
-          <td className='item'>Employee</td>
-          <td className='item'>
-            <button className='delete-btn'>Delete</button>
-          </td>
-        </tr>
+        {customersList.map((customer) => (
+          <tr className='row-item' key={customer.Used_Id}>
+            <td className='item'>{customer.User_Id}</td>
+            <td className='item'>{customer.First_Name}</td>
+            <td className='item'>{customer.Last_Name}</td>
+            <td className='item'>{customer.Username}</td>
+            <td className='item'>{customer.Email}</td>
+            <td className='item'>{customer.Role_Id}</td>
+            <td className='item'>
+              <button className='delete-btn'>Delete</button>
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );
 };
 
-export default CustomersList;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    customersList: state.reducer.customersList,
+  };
+};
+
+export default connect(mapStateToProps, null)(CustomersList);

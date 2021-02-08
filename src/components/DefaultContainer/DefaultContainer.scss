@@ -53,6 +53,10 @@
       box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.267);
       cursor: pointer;
 
+      &:hover {
+        box-shadow: 0 4px 10px 0 rgba(40, 40, 194, 0.39);
+      }
+
       h3 {
         font-size: 1.4rem;
         margin-top: 30px;

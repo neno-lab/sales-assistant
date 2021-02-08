@@ -3,47 +3,60 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { login } from '../../redux/actions/actions';
 import './Login.scss';
-// import TeamDSalesAssistant from '../../api/TeamDSalesAssistant';
+import TeamDSalesAssistant from '../../api/TeamDSalesAssistant';
+import { useHistory } from 'react-router-dom';
 
 const Login = ({ open, onClose, login, loginProps }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  let history = useHistory();
+  // let history=history();
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   login({ username: username, password: password });
+  //   console.log('tu sam');
+  //   setUsername('');
+  //   setPassword('');
+  //   onClose();
+  // };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login({ username: username, password: password });
-    console.log('tu sam');
-    setUsername('');
-    setPassword('');
-    onClose();
+
+    const params = new URLSearchParams();
+    params.append('username', username);
+    params.append('password', password);
+    params.append('grant_type', 'password');
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    };
+
+    try {
+      const response = await TeamDSalesAssistant.post('/login', params, config);
+      login(response.data);
+      console.log(response);
+
+      console.log('mjau', loginProps);
+
+      if (response.data.roles === 'Admin') {
+        history.push('/admin');
+      } else if (response.data.roles === 'Employee') {
+        history.push('/employee');
+      } else {
+        history.push('/');
+      }
+    } catch (err) {
+      console.error(err.message);
+    }
+
+    // console.log(username);
+    // console.log(password);
   };
 
-  console.log('loginProps: ', loginProps);
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   const params = new URLSearchParams();
-  //   params.append('username', username);
-  //   params.append('password', password);
-  //   params.append('grant_type', 'password');
-
-  //   const config = {
-  //     headers: {
-  //       'Content-Type': 'application/x-www-form-urlencoded',
-  //     },
-  //   };
-
-  //   try {
-  //     const response = await TeamDSalesAssistant.post('/login', params, config);
-  //     console.log(response);
-  //   } catch (err) {
-  //     console.error(err.message);
-  //   }
-
-  //   console.log(username);
-  //   console.log(password);
-  // };
+  console.log('loginProps: ', loginProps.username);
 
   const onChangeUsername = (e) => {
     setUsername(e.target.value);

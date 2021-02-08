@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import AddEmployee from '../AddEmployee/AddEmployee';
+import { connect } from 'react-redux';
 import './EmployeesList.scss';
 
-const EmployeesList = () => {
+const EmployeesList = ({ employeesList }) => {
   const [isOpenModalAddEmployee, setIsOpenModalEmplyee] = useState(false);
 
   const onClickPlus = () => {
-    // console.log('neno');
     setIsOpenModalEmplyee(true);
   };
 
@@ -29,48 +29,22 @@ const EmployeesList = () => {
           </tr>
         </thead>
         <tbody>
-          <tr className='row-item'>
-            <td className='item'>1</td>
-            <td className='item'>Ana</td>
-            <td className='item'>Anic</td>
-            <td className='item'>anaanic</td>
-            <td className='item'>ana@gmail.com</td>
-            <td className='item'>Customer</td>
-            <td className='item'>
-              <button className='edit-btn'>Edit</button>
-            </td>
-            <td className='item'>
-              <button className='delete-btn'>Delete</button>
-            </td>
-          </tr>
-          <tr className='row-item'>
-            <td className='item'>2</td>
-            <td className='item'>Neno</td>
-            <td className='item'>Zidic</td>
-            <td className='item'>nenozidic</td>
-            <td className='item'>neno@gmail.com</td>
-            <td className='item'>Employee</td>
-            <td className='item'>
-              <button className='edit-btn'>Edit</button>
-            </td>
-            <td className='item'>
-              <button className='delete-btn'>Delete</button>
-            </td>
-          </tr>
-          <tr className='row-item'>
-            <td className='item'>3</td>
-            <td className='item'>Dara</td>
-            <td className='item'>Daric</td>
-            <td className='item'>daradaric</td>
-            <td className='item'>dara@gmail.com</td>
-            <td className='item'>Employee</td>
-            <td className='item'>
-              <button className='edit-btn'>Edit</button>
-            </td>
-            <td className='item'>
-              <button className='delete-btn'>Delete</button>
-            </td>
-          </tr>
+          {employeesList.map((employee) => (
+            <tr className='row-item' key={employee.User_Id}>
+              <td className='item'>{employee.User_Id}</td>
+              <td className='item'>{employee.First_Name}</td>
+              <td className='item'>{employee.Last_Name}</td>
+              <td className='item'>{employee.Username}</td>
+              <td className='item'>{employee.Email}</td>
+              <td className='item'>{employee.Role_Id}</td>
+              <td className='item'>
+                <button className='edit-btn'>Edit</button>
+              </td>
+              <td className='item'>
+                <button className='delete-btn'>Delete</button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
       <AddEmployee
@@ -81,4 +55,10 @@ const EmployeesList = () => {
   );
 };
 
-export default EmployeesList;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    employeesList: state.reducer.employeesList,
+  };
+};
+
+export default connect(mapStateToProps, null)(EmployeesList);

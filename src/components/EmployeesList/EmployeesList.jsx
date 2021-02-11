@@ -1,10 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AddEmployee from '../AddEmployee/AddEmployee';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import './EmployeesList.scss';
+import TeamDSalesAssistant from '../../api/TeamDSalesAssistant';
+import { getAllEmployees } from '../../redux/actions/actions';
 
-const EmployeesList = ({ employeesList }) => {
+const EmployeesList = ({ employeesList, loginProps, getAllEmployees }) => {
   const [isOpenModalAddEmployee, setIsOpenModalEmplyee] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await TeamDSalesAssistant.get('/api/users/admin', {
+          headers: {
+            Authorization: `Bearer ${loginProps.token}`,
+          },
+        });
+        getAllEmployees(response.data.EmployeesList);
+      } catch (err) {
+        console.error(err.message);
+      }
+    };
+    fetchData();
+  }, [getAllEmployees, loginProps.token]);
 
   const onClickPlus = () => {
     setIsOpenModalEmplyee(true);
@@ -58,7 +77,14 @@ const EmployeesList = ({ employeesList }) => {
 const mapStateToProps = (state, ownProps) => {
   return {
     employeesList: state.reducer.employeesList,
+    loginProps: state.reducer.loginProps,
   };
 };
 
-export default connect(mapStateToProps, null)(EmployeesList);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getAllEmployees: bindActionCreators(getAllEmployees, dispatch),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeesList);

@@ -1,4 +1,5 @@
 import {
+  ADD_EMPLOYEE,
   GET_ALL_CUSTOMERS,
   GET_ALL_EMPLOYEES,
   GET_ALL_HATCHBACKS,
@@ -20,6 +21,14 @@ const initialState = {
   sedansList: [],
   suvsList: [],
 };
+
+// userId: '',
+//     firstName: '',
+//     lastName: '',
+//     email:'',
+//     username:'',
+//     password: '',
+//     role:''
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -72,6 +81,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         suvsList: action.payload,
+      };
+
+    case ADD_EMPLOYEE:
+      return {
+        ...state,
+        employeesList: [...state.employeesList, action.payload],
       };
 
     default:

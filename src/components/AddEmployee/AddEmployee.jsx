@@ -1,23 +1,51 @@
 import React, { useState } from 'react';
+import TeamDSalesAssistant from '../../api/TeamDSalesAssistant';
 import './AddEmployee.scss';
 
-const AddEmployee = ({ open, onClose }) => {
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+const AddEmployee = ({ open, onClose, loginProps }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setlastName] = useState('');
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [roleId, setRoleId] = useState('');
+  const config = {
+    headers: {
+      Authorization: `Bearer ${loginProps.token}`,
+    },
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('tu sam');
-    console.log(firstName);
-    console.log(lastName);
-    console.log(email);
-    console.log(username);
-    console.log(password);
-    console.log(roleId);
+    // console.log('tu sam');
+    // console.log(firstName);
+    // console.log(lastName);
+    // console.log(email);
+    // console.log(username);
+    // console.log(password);
+    // console.log(roleId);
+
+    try {
+      const response = await TeamDSalesAssistant.post(
+        '/api/users',
+        {
+          First_Name: firstName,
+          Last_Name: lastName,
+          Password: password,
+          Username: username,
+          Role_Id: roleId,
+          Email: email,
+        },
+        config
+      );
+      console.log(response);
+    } catch (err) {
+      console.error(err.message);
+    }
+
     onClose();
   };
 
@@ -109,4 +137,10 @@ const AddEmployee = ({ open, onClose }) => {
   );
 };
 
-export default AddEmployee;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    loginProps: state.reducer.loginProps,
+  };
+};
+
+export default connect(mapStateToProps, null)(AddEmployee);

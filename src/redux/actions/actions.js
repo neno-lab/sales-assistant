@@ -6,6 +6,7 @@ import {
   GET_ALL_HATCHBACKS,
   GET_ALL_SEDANS,
   GET_ALL_SUVS,
+  ADD_EMPLOYEE,
 } from './actionTypes';
 
 export const login = (login) => {
@@ -55,5 +56,12 @@ export const getAllSuvs = (suvs) => {
   return {
     type: GET_ALL_SUVS,
     payload: suvs,
+  };
+};
+
+export const addEmployee = (employee) => {
+  return {
+    type: ADD_EMPLOYEE,
+    payload: employee,
   };
 };

@@ -1,10 +1,12 @@
 import {
+  ADD_CAR,
   ADD_EMPLOYEE,
+  DELETE_CAR,
+  DELETE_CUSTOMER,
+  DELETE_EMPLOYEE,
   GET_ALL_CUSTOMERS,
   GET_ALL_EMPLOYEES,
-  GET_ALL_HATCHBACKS,
-  GET_ALL_SEDANS,
-  GET_ALL_SUVS,
+  GET_CARS,
   LOGIN,
   LOGOUT,
 } from '../actions/actionTypes';
@@ -17,18 +19,8 @@ const initialState = {
   },
   customersList: [],
   employeesList: [],
-  hatchbacksList: [],
-  sedansList: [],
-  suvsList: [],
+  carsList: [],
 };
-
-// userId: '',
-//     firstName: '',
-//     lastName: '',
-//     email:'',
-//     username:'',
-//     password: '',
-//     role:''
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -59,34 +51,50 @@ const reducer = (state = initialState, action) => {
       };
 
     case GET_ALL_EMPLOYEES:
-      console.log('reducer: ', action.payload);
       return {
         ...state,
         employeesList: action.payload,
-      };
-
-    case GET_ALL_HATCHBACKS:
-      return {
-        ...state,
-        hatchbacksList: action.payload,
-      };
-
-    case GET_ALL_SEDANS:
-      return {
-        ...state,
-        sedansList: action.payload,
-      };
-
-    case GET_ALL_SUVS:
-      return {
-        ...state,
-        suvsList: action.payload,
       };
 
     case ADD_EMPLOYEE:
       return {
         ...state,
         employeesList: [...state.employeesList, action.payload],
+      };
+
+    case DELETE_EMPLOYEE:
+      return {
+        ...state,
+        employeesList: state.employeesList.filter(
+          (employee) => employee.id !== action.payload
+        ),
+      };
+
+    case DELETE_CUSTOMER:
+      return {
+        ...state,
+        customersList: state.customersList.filter(
+          (customer) => customer.id !== action.payload
+        ),
+      };
+
+    case GET_CARS:
+      // console.log(action.payload);
+      return {
+        ...state,
+        carsList: action.payload,
+      };
+
+    case ADD_CAR:
+      return {
+        ...state,
+        carsList: [...state.carsList, action.payload],
+      };
+
+    case DELETE_CAR:
+      return {
+        ...state,
+        carsList: state.carsList.filter((car) => car.id !== action.payload),
       };
 
     default:

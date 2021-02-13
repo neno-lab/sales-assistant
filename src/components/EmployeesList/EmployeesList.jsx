@@ -4,9 +4,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import './EmployeesList.scss';
 import TeamDSalesAssistant from '../../api/TeamDSalesAssistant';
-import { getAllEmployees } from '../../redux/actions/actions';
+import { deleteEmployee, getAllEmployees } from '../../redux/actions/actions';
 
-const EmployeesList = ({ employeesList, loginProps, getAllEmployees }) => {
+const EmployeesList = ({
+  employeesList,
+  loginProps,
+  getAllEmployees,
+  deleteEmployee,
+}) => {
   const [isOpenModalAddEmployee, setIsOpenModalEmplyee] = useState(false);
 
   useEffect(() => {
@@ -29,6 +34,21 @@ const EmployeesList = ({ employeesList, loginProps, getAllEmployees }) => {
     setIsOpenModalEmplyee(true);
   };
 
+  const handleDeleteEmployee = async (e, id) => {
+    e.stopPropagation();
+    try {
+      const response = await TeamDSalesAssistant.delete(`/api/users/${id}`, {
+        headers: {
+          Authorization: `Bearer ${loginProps.token}`,
+        },
+      });
+      console.log(response);
+      deleteEmployee(id);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   return (
     <>
       <div className='add-icon'>
@@ -49,7 +69,10 @@ const EmployeesList = ({ employeesList, loginProps, getAllEmployees }) => {
         </thead>
         <tbody>
           {employeesList.map((employee) => (
-            <tr className='row-item' key={employee.User_Id}>
+            <tr
+              className='row-item'
+              key={Math.random().toString(36).substr(2, 9)}
+            >
               <td className='item'>{employee.User_Id}</td>
               <td className='item'>{employee.First_Name}</td>
               <td className='item'>{employee.Last_Name}</td>
@@ -60,7 +83,12 @@ const EmployeesList = ({ employeesList, loginProps, getAllEmployees }) => {
                 <button className='edit-btn'>Edit</button>
               </td>
               <td className='item'>
-                <button className='delete-btn'>Delete</button>
+                <button
+                  className='delete-btn'
+                  onClick={(e) => handleDeleteEmployee(e, employee.User_Id)}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
@@ -84,6 +112,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getAllEmployees: bindActionCreators(getAllEmployees, dispatch),
+    deleteEmployee: bindActionCreators(deleteEmployee, dispatch),
   };
 };
 

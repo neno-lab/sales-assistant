@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import TeamDSalesAssistant from '../../api/TeamDSalesAssistant';
 import './AddCar.scss';
 
-const AddCar = ({ open, onClose }) => {
+const AddCar = ({ open, onClose, loginProps }) => {
   const [carName, setCarName] = useState('');
   const [modelType, setModelType] = useState('');
   const [colorType, setColorType] = useState('');
@@ -13,22 +15,37 @@ const AddCar = ({ open, onClose }) => {
   const [carPrice, setCarPrice] = useState('');
   const [orderStatus, setOrderStatus] = useState(false);
   const [orderCompleteness, setOrderCompleteness] = useState(false);
+  const [image, setImage] = useState('');
+  const config = {
+    headers: {
+      Authorization: `Bearer ${loginProps.token}`,
+    },
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('tu sammm');
-
-    console.log(carName);
-    console.log(modelType);
-    console.log(colorType);
-    console.log(equipmentType);
-    console.log(fuelType);
-    console.log(engine);
-    console.log(powerInHp);
-    console.log(avgConsumption);
-    console.log(carPrice);
-    console.log(orderStatus);
-    console.log(orderCompleteness);
+    try {
+      const response = await TeamDSalesAssistant.post(
+        '/api/cars',
+        {
+          Car_Name: carName,
+          Model_Type: modelType,
+          Color_Type: colorType,
+          Equipment_Type: equipmentType,
+          FuelType: fuelType,
+          Engine: engine,
+          PowerInHp: powerInHp,
+          AvgConsumption: avgConsumption,
+          Car_Price: carPrice,
+          IsOrdered: orderStatus,
+          IsOrderCompleted: orderCompleteness,
+        },
+        config
+      );
+      console.log(response);
+    } catch (err) {
+      console.error(err.message);
+    }
     onClose();
   };
 
@@ -175,4 +192,10 @@ const AddCar = ({ open, onClose }) => {
   );
 };
 
-export default AddCar;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    loginProps: state.reducer.loginProps,
+  };
+};
+
+export default connect(mapStateToProps, null)(AddCar);

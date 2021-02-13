@@ -24,7 +24,6 @@ function App({ loginProps }) {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  // console.log(state.reducer.loginProps);
   return {
     loginProps: state.reducer.loginProps,
   };

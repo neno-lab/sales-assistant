@@ -39,8 +39,6 @@ const Login = ({ open, onClose, login, loginProps }) => {
       login(response.data);
       console.log(response);
 
-      console.log('mjau', loginProps);
-
       if (response.data.roles === 'Admin') {
         history.push('/admin');
       } else if (response.data.roles === 'Employee') {
@@ -51,12 +49,7 @@ const Login = ({ open, onClose, login, loginProps }) => {
     } catch (err) {
       console.error(err.message);
     }
-
-    // console.log(username);
-    // console.log(password);
   };
-
-  console.log('loginProps: ', loginProps.username);
 
   const onChangeUsername = (e) => {
     setUsername(e.target.value);

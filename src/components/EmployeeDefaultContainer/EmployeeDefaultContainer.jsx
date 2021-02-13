@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CarModelTypes from '../CarModelTypes/CarModelTypes';
+import AdminEmployeeCars from '../AdminEmployeeCars/AdminEmployeeCars';
 import './EmployeeDefaultContainer.scss';
 
 const EmployeeDefaultContainer = () => {
@@ -20,7 +20,7 @@ const EmployeeDefaultContainer = () => {
           Cars
         </div>
       </div>
-      {isActiveCars ? <CarModelTypes /> : null}
+      {isActiveCars ? <AdminEmployeeCars /> : null}
     </div>
   );
 };

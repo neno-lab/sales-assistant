@@ -1,117 +1,100 @@
 import React, { useState } from 'react';
-import AddCar from '../AddCar/AddCar';
+import CarsModelTypes from '../CarModelTypes/CarModelTypes';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import './AdminEmployeeCars.scss';
+import TeamDSalesAssistant from '../../api/TeamDSalesAssistant';
+import { getCars } from '../../redux/actions/actions';
 
-const AdminEmployeeCars = () => {
-  const [isOpenModalAddEmployee, setIsOpenModalEmplyee] = useState(false);
+const AdminEmployeeCars = ({ loginProps, getCars }) => {
+  const [isActiveHatchback, setIsActiveHatchBack] = useState(false);
+  const [isActiveSedan, setIsActiveSedan] = useState(false);
+  const [isActiveSuv, setIsActiveSuv] = useState(false);
 
-  const onClickPlus = () => {
-    // console.log('neno');
-    setIsOpenModalEmplyee(true);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${loginProps.token}`,
+    },
+  };
+
+  const onClickHatchback = async () => {
+    setIsActiveHatchBack(true);
+    setIsActiveSedan(false);
+    setIsActiveSuv(false);
+    try {
+      const response = await TeamDSalesAssistant.get(
+        '/api/cars/hatchback',
+        config
+      );
+      getCars(response.data);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const onClickSedan = async () => {
+    setIsActiveHatchBack(false);
+    setIsActiveSedan(true);
+    setIsActiveSuv(false);
+    try {
+      const response = await TeamDSalesAssistant.get('/api/cars/sedan', config);
+      getCars(response.data);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const onClickSuv = async () => {
+    setIsActiveHatchBack(false);
+    setIsActiveSedan(false);
+    setIsActiveSuv(true);
+    try {
+      const response = await TeamDSalesAssistant.get('/api/cars/suv', config);
+      getCars(response.data);
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
   return (
     <>
-      <div className='add-icon'>
-        <i className='fas fa-plus-circle' onClick={onClickPlus}></i>
-      </div>{' '}
-      <table className='content-table'>
-        <thead>
-          <tr className='row-title'>
-            <th className='title'>Car Id</th>
-            <th className='title'>Car Name</th>
-            <th className='title'>Model Type</th>
-            <th className='title'>Color Type</th>
-            <th className='title'>Equipment Type</th>
-            <th className='title'>Fuel Type</th>
-            <th className='title'>Engine</th>
-            <th className='title'>Power In Hp</th>
-            <th className='title'>Avg. Consumption</th>
-            <th className='title'>Car Price</th>
-            <th className='title'>Order Status</th>
-            <th className='title'>Order Completeness</th>
-            <th className='title'>Edit</th>
-            <th className='title'>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr className='row-item'>
-            <td className='item'>1</td>
-            <td className='item'>TeamD Raptor</td>
-            <td className='item'>SUV</td>
-            <td className='item'>Motion Red</td>
-            <td className='item'>Luxury</td>
-            <td className='item'>Petrol</td>
-            <td className='item'>1.6 T-GDI</td>
-            <td className='item'>170 KS</td>
-            <td className='item'>8.2 L/100km</td>
-            <td className='item'>47000.00</td>
-            <td className='item'>false</td>
-            <td className='item'>false</td>
-            <td className='item'>
-              <button className='edit-btn'>Edit</button>
-            </td>
-            <td className='item'>
-              <button className='delete-btn'>Delete</button>
-            </td>
-          </tr>
-          <tr className='row-item'>
-            <td className='item'>2</td>
-            <td className='item'>TeamD Raptor</td>
-            <td className='item'>SUV</td>
-            <td className='item'>Motion Red</td>
-            <td className='item'>Luxury</td>
-            <td className='item'>Petrol</td>
-            <td className='item'>1.6 T-GDI</td>
-            <td className='item'>170 KS</td>
-            <td className='item'>8.2 L/100km</td>
-            <td className='item'>47000.00</td>
-            <td className='item'>false</td>
-            <td className='item'>false</td>
-            <td className='item'>
-              <button className='edit-btn'>Edit</button>
-            </td>
-            <td className='item'>
-              <button className='delete-btn'>Delete</button>
-            </td>
-          </tr>
-          <tr className='row-item'>
-            <td className='item'>3</td>
-            <td className='item'>TeamD Raptor</td>
-            <td className='item'>SUV</td>
-            <td className='item'>Motion Red</td>
-            <td className='item'>Luxury</td>
-            <td className='item'>Petrol</td>
-            <td className='item'>1.6 T-GDI</td>
-            <td className='item'>170 KS</td>
-            <td className='item'>8.2 L/100km</td>
-            <td className='item'>47000.00</td>
-            <td className='item'>false</td>
-            <td className='item'>false</td>
-            <td className='item'>
-              <button className='edit-btn'>Edit</button>
-            </td>
-            <td className='item'>
-              <button className='delete-btn'>Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <AddCar
-        open={isOpenModalAddEmployee}
-        onClose={() => setIsOpenModalEmplyee(false)}
-      />
+      <div className='car-model-types'>
+        <div
+          className={`hatchback ${isActiveHatchback ? 'active' : ''}`}
+          onClick={onClickHatchback}
+        >
+          Hatchback
+        </div>
+        <div
+          className={`sedan ${isActiveSedan ? 'active' : ''}`}
+          onClick={onClickSedan}
+        >
+          Sedan
+        </div>
+        <div
+          className={`suv ${isActiveSuv ? 'active' : ''}`}
+          onClick={onClickSuv}
+        >
+          SUV
+        </div>
+      </div>
+      {isActiveHatchback || isActiveSedan || isActiveSuv ? (
+        <CarsModelTypes />
+      ) : null}
     </>
   );
 };
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    hatchbacksList: state.reducer.hatchbacksList,
-    sedansList: state.reducer.sedansList,
-    suvsList: state.reducer.suvsList,
+    loginProps: state.reducer.loginProps,
   };
 };
 
-export default connect(mapStateToProps, null)(AdminEmployeeCars);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCars: bindActionCreators(getCars, dispatch),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminEmployeeCars);

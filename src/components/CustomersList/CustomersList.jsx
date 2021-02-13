@@ -2,10 +2,15 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import TeamDSalesAssistant from '../../api/TeamDSalesAssistant';
-import { getAllCustomers } from '../../redux/actions/actions';
+import { deleteCustomer, getAllCustomers } from '../../redux/actions/actions';
 import './CustomersList.scss';
 
-const CustomersList = ({ customersList, loginProps, getAllCustomers }) => {
+const CustomersList = ({
+  customersList,
+  loginProps,
+  getAllCustomers,
+  deleteCustomer,
+}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -22,6 +27,21 @@ const CustomersList = ({ customersList, loginProps, getAllCustomers }) => {
     fetchData();
   }, [getAllCustomers, loginProps]);
 
+  const handleDeleteCustomer = async (e, id) => {
+    e.stopPropagation();
+    try {
+      const response = await TeamDSalesAssistant.delete(`/api/users/${id}`, {
+        headers: {
+          Authorization: `Bearer ${loginProps.token}`,
+        },
+      });
+      console.log(response);
+      deleteCustomer(id);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   return (
     <table className='content-table'>
       <thead>
@@ -37,7 +57,10 @@ const CustomersList = ({ customersList, loginProps, getAllCustomers }) => {
       </thead>
       <tbody>
         {customersList.map((customer) => (
-          <tr className='row-item' key={customer.Used_Id}>
+          <tr
+            className='row-item'
+            key={Math.random().toString(36).substr(2, 9)}
+          >
             <td className='item'>{customer.User_Id}</td>
             <td className='item'>{customer.First_Name}</td>
             <td className='item'>{customer.Last_Name}</td>
@@ -45,7 +68,12 @@ const CustomersList = ({ customersList, loginProps, getAllCustomers }) => {
             <td className='item'>{customer.Email}</td>
             <td className='item'>{customer.Role_Id}</td>
             <td className='item'>
-              <button className='delete-btn'>Delete</button>
+              <button
+                className='delete-btn'
+                onClick={(e) => handleDeleteCustomer(e, customer.User_Id)}
+              >
+                Delete
+              </button>
             </td>
           </tr>
         ))}
@@ -64,6 +92,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getAllCustomers: bindActionCreators(getAllCustomers, dispatch),
+    deleteCustomer: bindActionCreators(deleteCustomer, dispatch),
   };
 };
 

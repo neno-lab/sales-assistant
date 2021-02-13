@@ -3,7 +3,6 @@ import TeamDSalesAssistant from '../../api/TeamDSalesAssistant';
 import './AddEmployee.scss';
 
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 const AddEmployee = ({ open, onClose, loginProps }) => {
   const [firstName, setFirstName] = useState('');
@@ -20,13 +19,6 @@ const AddEmployee = ({ open, onClose, loginProps }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log('tu sam');
-    // console.log(firstName);
-    // console.log(lastName);
-    // console.log(email);
-    // console.log(username);
-    // console.log(password);
-    // console.log(roleId);
 
     try {
       const response = await TeamDSalesAssistant.post(

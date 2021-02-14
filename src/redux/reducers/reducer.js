@@ -9,6 +9,7 @@ import {
   GET_CARS,
   LOGIN,
   LOGOUT,
+  UPDATE_CAR,
   UPDATE_EMPLOYEE,
 } from '../actions/actionTypes';
 
@@ -21,7 +22,6 @@ const initialState = {
   customersList: [],
   employeesList: [],
   carsList: [],
-  employeeDatas: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -106,6 +106,14 @@ const reducer = (state = initialState, action) => {
           employee.User_Id !== action.payload.User_Id
             ? employee
             : action.payload
+        ),
+      };
+
+    case UPDATE_CAR:
+      return {
+        ...state,
+        carsList: state.carsList.map((car) =>
+          car.Car_Id !== action.payload.Car_Id ? car : action.payload
         ),
       };
 

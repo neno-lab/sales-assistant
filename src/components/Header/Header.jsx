@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import LogRegBtns from '../LogRegBtns/LogRegBtns';
 import HiUserName from '../HiUserName/HiUserName';
 import { connect } from 'react-redux';

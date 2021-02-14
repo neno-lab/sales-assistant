@@ -5,12 +5,22 @@ import { bindActionCreators } from 'redux';
 import './CarModelTypes.scss';
 import { deleteCar, getCars } from '../../redux/actions/actions';
 import TeamDSalesAssistant from '../../api/TeamDSalesAssistant';
+import UpdateCar from '../UpdateCar/UpdateCar';
 
 const CarModelTypes = ({ carsList, loginProps, deleteCar }) => {
-  const [isOpenModalAddEmployee, setIsOpenModalEmployee] = useState(false);
+  const [isOpenModalAddCar, setIsOpenModalAddCar] = useState(false);
+  const [isOpenModalEditCar, setIsOpenModalEditCar] = useState(false);
+  const [editProps, setEditProps] = useState({});
 
   const onClickPlus = () => {
-    setIsOpenModalEmployee(true);
+    setIsOpenModalAddCar(true);
+  };
+
+  const onClickEdit = (e, car) => {
+    // console.log('car', car);
+    e.stopPropagation();
+    setIsOpenModalEditCar(true);
+    setEditProps(car);
   };
 
   const handleDeleteCar = async (e, id) => {
@@ -75,7 +85,12 @@ const CarModelTypes = ({ carsList, loginProps, deleteCar }) => {
                 {car.IsOrderComplete === false ? 'Not completed' : 'Completed'}
               </td>
               <td className='item'>
-                <button className='edit-btn'>Edit</button>
+                <button
+                  className='edit-btn'
+                  onClick={(e) => onClickEdit(e, car)}
+                >
+                  Edit
+                </button>
               </td>
               <td className='item'>
                 <button
@@ -90,8 +105,13 @@ const CarModelTypes = ({ carsList, loginProps, deleteCar }) => {
         </tbody>
       </table>
       <AddCar
-        open={isOpenModalAddEmployee}
-        onClose={() => setIsOpenModalEmployee(false)}
+        open={isOpenModalAddCar}
+        onClose={() => setIsOpenModalAddCar(false)}
+      />
+      <UpdateCar
+        open={isOpenModalEditCar}
+        onClose={() => setIsOpenModalEditCar(false)}
+        editProps={editProps}
       />
     </>
   );

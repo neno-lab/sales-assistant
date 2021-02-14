@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import TeamDSalesAssistant from '../../api/TeamDSalesAssistant';
 // import TeamDSalesAssistant from '../../api/TeamDSalesAssistant';
 import './Registration.scss';
 
@@ -9,39 +10,34 @@ const Registration = ({ open, onClose }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('tu sam');
+
+    let register = {
+      First_Name: firstName,
+      Last_Name: lastName,
+      Password: password,
+      Username: username,
+      Email: email,
+    };
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    try {
+      const response = await TeamDSalesAssistant.post(
+        '/api/account/register',
+        register,
+        config
+      );
+      console.log(response);
+    } catch (err) {
+      console.error(err.message);
+    }
   };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   let register = {
-  //     First_Name: firstName,
-  //     Last_Name: lastName,
-  //     Password: password,
-  //     Username: username,
-  //     Email: email,
-  //   };
-
-  //   const config = {
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   };
-
-  //   try {
-  //     const response = await TeamDSalesAssistant.post(
-  //       '/api/account/register',
-  //       register,
-  //       config
-  //     );
-  //     console.log(response);
-  //   } catch (err) {
-  //     console.error(err.message);
-  //   }
-  // };
 
   const onChangeFirstName = (e) => {
     setFirstName(e.target.value);

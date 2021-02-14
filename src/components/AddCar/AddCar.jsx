@@ -17,7 +17,7 @@ const AddCar = ({ open, onClose, loginProps, addCar }) => {
   const [carPrice, setCarPrice] = useState('');
   const [orderStatus, setOrderStatus] = useState(false);
   const [orderCompleteness, setOrderCompleteness] = useState(false);
-  const [image, setImage] = useState('');
+  // const [image, setImage] = useState('');
   const config = {
     headers: {
       Authorization: `Bearer ${loginProps.token}`,

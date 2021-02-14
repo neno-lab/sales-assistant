@@ -1,0 +1,118 @@
+@import '../../root-colors.scss';
+
+.update-car-container {
+  width: 100%;
+  height: 100%;
+  background-color: #00000070;
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+
+.update-car-form {
+  .update-car-card {
+    background-color: $white;
+    display: flex;
+    // justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 30px;
+    width: 600px;
+    height: 780px;
+    display: flex;
+    justify-content: center;
+
+    .update-car-title-exit {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 450px;
+      margin-top: -20px;
+
+      h2 {
+        font-size: 40px;
+        color: $dark;
+      }
+
+      .update-car-exit {
+        border: none;
+        background-image: url('../../assests/x.svg');
+        background-repeat: no-repeat;
+        width: 50px;
+        height: 50px;
+        background-position: center;
+        outline: none;
+
+        &:hover {
+          border-radius: 30px;
+          background-color: $gray;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .update-car-input-holders {
+      display: flex;
+      // flex-direction: column;
+      flex-wrap: wrap;
+      margin-top: 40px;
+      width: 600px;
+      margin-right: -60px;
+
+      .update-car-carname,
+      .update-car-modeltype,
+      .update-car-colortype,
+      .update-car-equipmenttype,
+      .update-car-fueltype,
+      .update-car-engine,
+      .update-car-powerinhp,
+      .update-car-avgconsumption,
+      .update-car-carprice,
+      .update-car-orderstatus,
+      .update-car-ordercompleteness {
+        padding: 20px 0px 20px 20px;
+        border-radius: 30px;
+        margin-top: 20px;
+        margin-right: 10px;
+        outline: none;
+        font-size: 20px;
+        border: solid 1px $dark;
+
+        &::placeholder {
+          color: $grayish;
+        }
+
+        &:focus {
+          border: solid 1px $blue;
+          outline: none;
+        }
+      }
+    }
+
+    .update-car-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 300px;
+      margin-top: -20px;
+
+      .update-car-btn-btn {
+        margin-top: 50px;
+        border: none;
+        background-color: $blue;
+        width: 100%;
+        border-radius: 30px;
+        padding: 20px 0px 20px 0px;
+        font-size: 20px;
+        color: $white;
+        outline: none;
+        cursor: pointer;
+      }
+    }
+  }
+}

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import TeamDSalesAssistant from '../../api/TeamDSalesAssistant';
+import { addCar } from '../../redux/actions/actions';
 import './AddCar.scss';
 
-const AddCar = ({ open, onClose, loginProps }) => {
+const AddCar = ({ open, onClose, loginProps, addCar }) => {
   const [carName, setCarName] = useState('');
   const [modelType, setModelType] = useState('');
   const [colorType, setColorType] = useState('');
@@ -43,6 +45,7 @@ const AddCar = ({ open, onClose, loginProps }) => {
         config
       );
       console.log(response);
+      addCar(response.data);
     } catch (err) {
       console.error(err.message);
     }
@@ -198,4 +201,10 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, null)(AddCar);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addCar: bindActionCreators(addCar, dispatch),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddCar);

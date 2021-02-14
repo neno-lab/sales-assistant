@@ -9,6 +9,8 @@ import {
   GET_CARS,
   ADD_CAR,
   DELETE_CAR,
+  EDIT_EMPLOYEE,
+  UPDATE_EMPLOYEE,
 } from './actionTypes';
 
 export const login = (login) => {
@@ -78,5 +80,12 @@ export const deleteCar = (id) => {
   return {
     type: DELETE_CAR,
     payload: id,
+  };
+};
+
+export const updateEmployee = (employee) => {
+  return {
+    type: UPDATE_EMPLOYEE,
+    payload: JSON.parse(employee),
   };
 };

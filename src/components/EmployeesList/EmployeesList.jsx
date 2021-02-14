@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import './EmployeesList.scss';
 import TeamDSalesAssistant from '../../api/TeamDSalesAssistant';
 import { deleteEmployee, getAllEmployees } from '../../redux/actions/actions';
+import UpdateEmployee from '../UpdateEmployee/UpdateEmployee';
 
 const EmployeesList = ({
   employeesList,
@@ -12,7 +13,9 @@ const EmployeesList = ({
   getAllEmployees,
   deleteEmployee,
 }) => {
-  const [isOpenModalAddEmployee, setIsOpenModalEmplyee] = useState(false);
+  const [isOpenModalAddEmployee, setIsOpenModalAddEmployee] = useState(false);
+  const [isOpenModalEditEmployee, setIsOpenModalEditEmployee] = useState(false);
+  const [editProps, setEditProps] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,7 +34,14 @@ const EmployeesList = ({
   }, [getAllEmployees, loginProps.token]);
 
   const onClickPlus = () => {
-    setIsOpenModalEmplyee(true);
+    setIsOpenModalAddEmployee(true);
+  };
+
+  const onClickEdit = (e, employee) => {
+    // console.log('employee', employee);
+    e.stopPropagation();
+    setIsOpenModalEditEmployee(true);
+    setEditProps(employee);
   };
 
   const handleDeleteEmployee = async (e, id) => {
@@ -80,7 +90,12 @@ const EmployeesList = ({
               <td className='item'>{employee.Email}</td>
               <td className='item'>{employee.Role_Id}</td>
               <td className='item'>
-                <button className='edit-btn'>Edit</button>
+                <button
+                  className='edit-btn'
+                  onClick={(e) => onClickEdit(e, employee)}
+                >
+                  Edit
+                </button>
               </td>
               <td className='item'>
                 <button
@@ -96,7 +111,12 @@ const EmployeesList = ({
       </table>
       <AddEmployee
         open={isOpenModalAddEmployee}
-        onClose={() => setIsOpenModalEmplyee(false)}
+        onClose={() => setIsOpenModalAddEmployee(false)}
+      />
+      <UpdateEmployee
+        open={isOpenModalEditEmployee}
+        onClose={() => setIsOpenModalEditEmployee(false)}
+        editProps={editProps}
       />
     </>
   );

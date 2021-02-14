@@ -69,10 +69,10 @@ const CarModelTypes = ({ carsList, loginProps, deleteCar }) => {
               <td className='item'>{car.AvgConsumption}</td>
               <td className='item'>{car.Car_Price}</td>
               <td className='item'>
-                {car.IsOrdered === false ? 'None' : 'Ordered'}
+                {car.IsOrdered === false ? 'Not ordered' : 'Ordered'}
               </td>
               <td className='item'>
-                {car.IsOrderComplete === false ? 'None' : 'Completed'}
+                {car.IsOrderComplete === false ? 'Not completed' : 'Completed'}
               </td>
               <td className='item'>
                 <button className='edit-btn'>Edit</button>

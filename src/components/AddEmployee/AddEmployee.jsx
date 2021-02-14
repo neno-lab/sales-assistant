@@ -3,8 +3,10 @@ import TeamDSalesAssistant from '../../api/TeamDSalesAssistant';
 import './AddEmployee.scss';
 
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { addEmployee } from '../../redux/actions/actions';
 
-const AddEmployee = ({ open, onClose, loginProps }) => {
+const AddEmployee = ({ open, onClose, loginProps, addEmployee }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setlastName] = useState('');
   const [email, setEmail] = useState('');
@@ -34,6 +36,7 @@ const AddEmployee = ({ open, onClose, loginProps }) => {
         config
       );
       console.log(response);
+      addEmployee(response.data);
     } catch (err) {
       console.error(err.message);
     }
@@ -135,4 +138,10 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, null)(AddEmployee);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addEmployee: bindActionCreators(addEmployee, dispatch),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddEmployee);

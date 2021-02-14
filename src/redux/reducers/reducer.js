@@ -9,6 +9,7 @@ import {
   GET_CARS,
   LOGIN,
   LOGOUT,
+  UPDATE_EMPLOYEE,
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -20,6 +21,7 @@ const initialState = {
   customersList: [],
   employeesList: [],
   carsList: [],
+  employeeDatas: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -63,10 +65,11 @@ const reducer = (state = initialState, action) => {
       };
 
     case DELETE_EMPLOYEE:
+      console.log('delete employee: ', state.employeesList);
       return {
         ...state,
         employeesList: state.employeesList.filter(
-          (employee) => employee.id !== action.payload
+          (employee) => employee.User_Id !== action.payload
         ),
       };
 
@@ -74,12 +77,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         customersList: state.customersList.filter(
-          (customer) => customer.id !== action.payload
+          (customer) => customer.User_Id !== action.payload
         ),
       };
 
     case GET_CARS:
-      // console.log(action.payload);
       return {
         ...state,
         carsList: action.payload,
@@ -94,7 +96,17 @@ const reducer = (state = initialState, action) => {
     case DELETE_CAR:
       return {
         ...state,
-        carsList: state.carsList.filter((car) => car.id !== action.payload),
+        carsList: state.carsList.filter((car) => car.Car_Id !== action.payload),
+      };
+
+    case UPDATE_EMPLOYEE:
+      return {
+        ...state,
+        employeesList: state.employeesList.map((employee) =>
+          employee.User_Id !== action.payload.User_Id
+            ? employee
+            : action.payload
+        ),
       };
 
     default:

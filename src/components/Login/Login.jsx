@@ -10,15 +10,6 @@ const Login = ({ open, onClose, login, loginProps }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   let history = useHistory();
-  // let history=history();
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   login({ username: username, password: password });
-  //   console.log('tu sam');
-  //   setUsername('');
-  //   setPassword('');
-  //   onClose();
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +28,6 @@ const Login = ({ open, onClose, login, loginProps }) => {
     try {
       const response = await TeamDSalesAssistant.post('/login', params, config);
       login(response.data);
-      console.log(response);
 
       if (response.data.roles === 'Admin') {
         history.push('/admin');

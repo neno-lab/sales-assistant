@@ -6,6 +6,7 @@ import {
   DELETE_EMPLOYEE,
   GET_ALL_CUSTOMERS,
   GET_ALL_EMPLOYEES,
+  GET_CARD_ID,
   GET_CARS,
   LOGIN,
   LOGOUT,
@@ -22,6 +23,7 @@ const initialState = {
   customersList: [],
   employeesList: [],
   carsList: [],
+  cardId: 0,
 };
 
 const reducer = (state = initialState, action) => {
@@ -65,7 +67,6 @@ const reducer = (state = initialState, action) => {
       };
 
     case DELETE_EMPLOYEE:
-      console.log('delete employee: ', state.employeesList);
       return {
         ...state,
         employeesList: state.employeesList.filter(
@@ -115,6 +116,12 @@ const reducer = (state = initialState, action) => {
         carsList: state.carsList.map((car) =>
           car.Car_Id !== action.payload.Car_Id ? car : action.payload
         ),
+      };
+
+    case GET_CARD_ID:
+      return {
+        ...state,
+        cardId: action.payload,
       };
 
     default:

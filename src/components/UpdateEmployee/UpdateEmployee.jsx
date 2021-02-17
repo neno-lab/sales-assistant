@@ -37,9 +37,6 @@ const UpdateEmployee = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(firstName);
-    console.log(lastName);
-
     try {
       const response = await TeamDSalesAssistant.put(
         '/api/users',
@@ -54,7 +51,6 @@ const UpdateEmployee = ({
         },
         config
       );
-      console.log(response);
       updateEmployee(response.config.data);
     } catch (err) {
       console.error(err.message);

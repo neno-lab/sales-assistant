@@ -38,7 +38,6 @@ const EmployeesList = ({
   };
 
   const onClickEdit = (e, employee) => {
-    // console.log('employee', employee);
     e.stopPropagation();
     setIsOpenModalEditEmployee(true);
     setEditProps(employee);
@@ -52,7 +51,6 @@ const EmployeesList = ({
           Authorization: `Bearer ${loginProps.token}`,
         },
       });
-      console.log(response);
       deleteEmployee(id);
     } catch (err) {
       console.error(err.message);

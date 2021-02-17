@@ -6,7 +6,6 @@ import { updateCar } from '../../redux/actions/actions';
 import './UpdateCar.scss';
 
 const UpdateCar = ({ open, onClose, loginProps, editProps, updateCar }) => {
-  console.log(editProps);
   const [carName, setCarName] = useState('');
   const [modelType, setModelType] = useState('');
   const [colorType, setColorType] = useState('');
@@ -60,7 +59,6 @@ const UpdateCar = ({ open, onClose, loginProps, editProps, updateCar }) => {
         },
         config
       );
-      console.log(response);
       updateCar(response.config.data);
     } catch (err) {
       console.error(err.message);

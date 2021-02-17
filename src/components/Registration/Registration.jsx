@@ -33,7 +33,6 @@ const Registration = ({ open, onClose }) => {
         register,
         config
       );
-      console.log(response);
     } catch (err) {
       console.error(err.message);
     }

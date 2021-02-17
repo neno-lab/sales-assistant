@@ -20,6 +20,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
+  padding: 0 20px;
 
   h2 {
     font-family: 'eina';
@@ -80,6 +82,10 @@
     animation: moveInBottom 0.5s ease-out 0.75s;
     animation-fill-mode: backwards;
 
+    .link {
+      text-decoration: none;
+    }
+
     .card {
       display: flex;
       flex-direction: column;
@@ -88,9 +94,10 @@
       width: 330px;
       height: 250px;
       background: linear-gradient(to left top, #f5f7fa, #b8c6db);
-      border-radius: 20px;
+      border-radius: 10px;
       box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.267);
       cursor: pointer;
+      transition: 0.25s ease;
 
       &:hover {
         box-shadow: 0 4px 10px 0 rgba(40, 40, 194, 0.39);

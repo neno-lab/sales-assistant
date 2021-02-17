@@ -11,6 +11,7 @@ import {
   DELETE_CAR,
   UPDATE_EMPLOYEE,
   UPDATE_CAR,
+  GET_CARD_ID,
 } from './actionTypes';
 
 export const login = (login) => {
@@ -62,7 +63,6 @@ export const deleteCustomer = (id) => {
 };
 
 export const getCars = (cars) => {
-  // console.log(cars);
   return {
     type: GET_CARS,
     payload: cars,
@@ -94,5 +94,12 @@ export const updateCar = (car) => {
   return {
     type: UPDATE_CAR,
     payload: JSON.parse(car),
+  };
+};
+
+export const getCardlId = (id) => {
+  return {
+    type: GET_CARD_ID,
+    payload: id,
   };
 };

@@ -17,7 +17,6 @@ const CarModelTypes = ({ carsList, loginProps, deleteCar }) => {
   };
 
   const onClickEdit = (e, car) => {
-    // console.log('car', car);
     e.stopPropagation();
     setIsOpenModalEditCar(true);
     setEditProps(car);
@@ -31,7 +30,6 @@ const CarModelTypes = ({ carsList, loginProps, deleteCar }) => {
           Authorization: `Bearer ${loginProps.token}`,
         },
       });
-      console.log(response);
       deleteCar(id);
     } catch (err) {
       console.error(err.message);

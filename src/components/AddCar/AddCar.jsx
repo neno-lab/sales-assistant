@@ -44,7 +44,6 @@ const AddCar = ({ open, onClose, loginProps, addCar }) => {
         },
         config
       );
-      console.log(response);
       addCar(response.data);
     } catch (err) {
       console.error(err.message);

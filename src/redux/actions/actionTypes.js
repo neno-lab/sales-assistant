@@ -10,3 +10,4 @@ export const ADD_CAR = 'ADD_CAR';
 export const DELETE_CAR = 'DELETE_CAR';
 export const UPDATE_EMPLOYEE = 'UPDATE_EMPLOYEE';
 export const UPDATE_CAR = 'UPDATE_CAR';
+export const GET_CARD_ID = 'GET_CARD_ID';

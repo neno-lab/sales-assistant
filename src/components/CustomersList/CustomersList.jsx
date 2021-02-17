@@ -35,7 +35,6 @@ const CustomersList = ({
           Authorization: `Bearer ${loginProps.token}`,
         },
       });
-      console.log(response);
       deleteCustomer(id);
     } catch (err) {
       console.error(err.message);

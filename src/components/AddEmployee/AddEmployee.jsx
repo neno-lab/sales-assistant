@@ -35,7 +35,6 @@ const AddEmployee = ({ open, onClose, loginProps, addEmployee }) => {
         },
         config
       );
-      console.log(response);
       addEmployee(response.data);
     } catch (err) {
       console.error(err.message);

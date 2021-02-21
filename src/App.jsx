@@ -13,7 +13,7 @@ function App({ loginProps }) {
       <Switch>
         <Route exact path='/' component={Home} />
         <Route exact path='/order' component={OrderPage} />
-        {loginProps.roles === 'Admin' ? (
+        {loginProps.roles === 'admin' ? (
           <Route exact path='/admin' component={Admin} />
         ) : null}
         <Route exact path='/employee' component={Employee} />

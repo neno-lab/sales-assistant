@@ -38,6 +38,7 @@ const Login = ({ open, onClose, login, loginProps }) => {
       }
     } catch (err) {
       console.error(err.message);
+      alert('Unsuccessful Log In! Please try again!');
     }
   };
 

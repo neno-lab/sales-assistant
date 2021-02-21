@@ -15,8 +15,8 @@ const UpdateCar = ({ open, onClose, loginProps, editProps, updateCar }) => {
   const [powerInHp, setPowerInHp] = useState('');
   const [avgConsumption, setAvgConsumption] = useState('');
   const [carPrice, setCarPrice] = useState('');
-  const [orderStatus, setOrderStatus] = useState(false);
-  const [orderCompleteness, setOrderCompleteness] = useState(false);
+  const [orderStatus, setOrderStatus] = useState('');
+  const [orderCompleteness, setOrderCompleteness] = useState('');
   // const [image, setImage] = useState('');
   const config = {
     headers: {
@@ -54,14 +54,16 @@ const UpdateCar = ({ open, onClose, loginProps, editProps, updateCar }) => {
           PowerInHp: powerInHp,
           AvgConsumption: avgConsumption,
           Car_Price: carPrice,
-          IsOrdered: orderStatus,
-          IsOrderCompleted: orderCompleteness,
+          IsOrdered: orderStatus === 'true' ? true : false,
+          IsOrderComplete: orderCompleteness === 'true' ? true : false,
         },
         config
       );
+      console.log(response);
       updateCar(response.config.data);
     } catch (err) {
       console.error(err.message);
+      alert('You have unsuccessfully updated certain car! Please try again!');
     }
     onClose();
   };

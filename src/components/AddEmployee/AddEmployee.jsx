@@ -38,6 +38,9 @@ const AddEmployee = ({ open, onClose, loginProps, addEmployee }) => {
       addEmployee(response.data);
     } catch (err) {
       console.error(err.message);
+      alert(
+        'You have unsuccessfully added certain employee! Please try again!'
+      );
     }
 
     onClose();

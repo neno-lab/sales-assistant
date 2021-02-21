@@ -8,6 +8,7 @@ import {
   GET_ALL_EMPLOYEES,
   GET_CARD_ID,
   GET_CARS,
+  GET_SALES,
   LOGIN,
   LOGOUT,
   UPDATE_CAR,
@@ -23,17 +24,19 @@ const initialState = {
   customersList: [],
   employeesList: [],
   carsList: [],
+  salesList: [],
   cardId: 0,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN:
+      console.log(action.payload);
       return {
         ...state,
         loginProps: {
           username: action.payload.username,
-          roles: action.payload.roles,
+          roles: action.payload.roles.toLowerCase(),
           token: action.payload.access_token,
         },
       };
@@ -83,6 +86,7 @@ const reducer = (state = initialState, action) => {
       };
 
     case GET_CARS:
+      console.log('get cars: ', action.payload);
       return {
         ...state,
         carsList: action.payload,
@@ -116,6 +120,12 @@ const reducer = (state = initialState, action) => {
         carsList: state.carsList.map((car) =>
           car.Car_Id !== action.payload.Car_Id ? car : action.payload
         ),
+      };
+
+    case GET_SALES:
+      return {
+        ...state,
+        salesList: action.payload,
       };
 
     case GET_CARD_ID:

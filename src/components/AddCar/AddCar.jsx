@@ -47,6 +47,7 @@ const AddCar = ({ open, onClose, loginProps, addCar }) => {
       addCar(response.data);
     } catch (err) {
       console.error(err.message);
+      alert('You have unsuccessfully added certain car! Please try again!');
     }
     onClose();
   };

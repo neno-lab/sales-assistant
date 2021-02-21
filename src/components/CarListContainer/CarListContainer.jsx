@@ -9,7 +9,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getCars } from '../../redux/actions/actions';
 
-const CarListContainer = ({ cardId, carsList, getCars }) => {
+const CarListContainer = ({ cardId, carsList, getCars, loginProps }) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${loginProps.token}`,
+    },
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -33,6 +38,37 @@ const CarListContainer = ({ cardId, carsList, getCars }) => {
     };
     fetchData();
   }, [cardId, getCars]);
+
+  const orderCar = async (carProps) => {
+    try {
+      const responseOrder = await TeamDSalesAssistant.post(
+        '/api/sales/order',
+        {
+          Car_Id: carProps.Car_Id,
+          Car_Name: carProps.carName,
+          Model_Type: carProps.modelType,
+          Color_Type: carProps.colorType,
+          Equipment_Type: carProps.equipmentType,
+          FuelType: carProps.fuelType,
+          Engine: carProps.engine,
+          PowerInHp: carProps.powerInHp,
+          AvgConsumption: carProps.avgConsumption,
+          Car_Price: carProps.carPrice,
+          IsOrdered: true,
+          IsOrderComplete: true,
+        },
+        config
+      );
+      console.log(responseOrder);
+      // const responseRemoveCar = await TeamDSalesAssistant.delete(`/api/cars/${carProps.Car_Id}`,
+      //   config
+      // );
+      alert('You have successfully ordered your car! Check your email!');
+    } catch (err) {
+      console.error(err.message);
+      alert('You must be logged in to order a car!');
+    }
+  };
 
   return (
     <div className='car-list-container'>
@@ -67,51 +103,13 @@ const CarListContainer = ({ cardId, carsList, getCars }) => {
               <p className='desc'>{car.PowerInHp}</p>
               <p className='desc'>{car.AvgConsumption}</p>
               <p className='desc'>{car.Car_Price}&euro;</p>
-              <button className='buy'>Buy</button>
+              <button className='order' onClick={() => orderCar(car)}>
+                Order
+              </button>
             </figure>
           </div>
         ))}
       </div>
-      {/* <div className='wrap'>
-        <div className='card'>
-          <figure className='front'>
-            <img src={hatchback} alt='Model' className='car-image' />
-            <div className='car-name'>
-              <h4 className='brand-name'>TeamD</h4>
-              <p className='model-name'>Raptor</p>
-            </div>
-          </figure>
-          <figure className='back'>
-            <p className='desc'>Vanta_Black</p>
-            <p className='desc'>Sport</p>
-            <p className='desc'>Petrol</p>
-            <p className='desc'>1.4 T-GDI</p>
-            <p className='desc'>150 HP</p>
-            <p className='desc'>6.5 L/100km</p>
-            <p className='desc'>28000</p>
-            <button className='buy'>Buy</button>
-          </figure>
-        </div>
-        <div className='card'>
-          <figure className='front'>
-            <img src={hatchback} alt='Model' className='car-image' />
-            <div className='car-name'>
-              <h4 className='brand-name'>TeamD</h4>
-              <p className='model-name'>Raptor</p>
-            </div>
-          </figure>
-          <figure className='back'>
-            <p className='desc'>Vanta_Black</p>
-            <p className='desc'>Sport</p>
-            <p className='desc'>Petrol</p>
-            <p className='desc'>1.4 T-GDI</p>
-            <p className='desc'>150 HP</p>
-            <p className='desc'>6.5 L/100km</p>
-            <p className='desc'>28000</p>
-            <button className='buy'>Buy</button>
-          </figure>
-        </div>
-      </div> */}
     </div>
   );
 };
@@ -120,6 +118,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     cardId: state.reducer.cardId,
     carsList: state.reducer.carsList,
+    loginProps: state.reducer.loginProps,
   };
 };
 

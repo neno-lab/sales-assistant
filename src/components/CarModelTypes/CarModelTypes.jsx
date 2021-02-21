@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AddCar from '../AddCar/AddCar';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -11,6 +11,11 @@ const CarModelTypes = ({ carsList, loginProps, deleteCar }) => {
   const [isOpenModalAddCar, setIsOpenModalAddCar] = useState(false);
   const [isOpenModalEditCar, setIsOpenModalEditCar] = useState(false);
   const [editProps, setEditProps] = useState({});
+  // console.log(carsList[2]?.IsOrdered);
+  // console.log(carsList[2]?.IsOrderCompleted);
+  console.log(carsList);
+
+  useEffect(() => {}, [carsList]);
 
   const onClickPlus = () => {
     setIsOpenModalAddCar(true);
@@ -77,10 +82,10 @@ const CarModelTypes = ({ carsList, loginProps, deleteCar }) => {
               <td className='item'>{car.AvgConsumption}</td>
               <td className='item'>{car.Car_Price}</td>
               <td className='item'>
-                {car.IsOrdered === false ? 'Not ordered' : 'Ordered'}
+                {car.IsOrdered ? 'Ordered' : 'Not ordered'}
               </td>
               <td className='item'>
-                {car.IsOrderComplete === false ? 'Not completed' : 'Completed'}
+                {car.IsOrderComplete ? 'Completed' : 'Not completed'}
               </td>
               <td className='item'>
                 <button

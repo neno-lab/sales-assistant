@@ -12,6 +12,7 @@ import {
   UPDATE_EMPLOYEE,
   UPDATE_CAR,
   GET_CARD_ID,
+  GET_SALES,
 } from './actionTypes';
 
 export const login = (login) => {
@@ -101,5 +102,12 @@ export const getCardlId = (id) => {
   return {
     type: GET_CARD_ID,
     payload: id,
+  };
+};
+
+export const getSales = (sales) => {
+  return {
+    type: GET_SALES,
+    payload: sales,
   };
 };

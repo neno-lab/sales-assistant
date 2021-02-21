@@ -33,8 +33,14 @@ const Registration = ({ open, onClose }) => {
         register,
         config
       );
+      if (response.status === 201) {
+        alert('You have registered successfully!');
+        onClose();
+      }
+      console.log(response);
     } catch (err) {
       console.error(err.message);
+      alert('Unsuccessful Registartion! Please try again!');
     }
   };
 

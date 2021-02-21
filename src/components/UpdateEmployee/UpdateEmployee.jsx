@@ -54,6 +54,9 @@ const UpdateEmployee = ({
       updateEmployee(response.config.data);
     } catch (err) {
       console.error(err.message);
+      alert(
+        'You have unsuccessfully updated certain employee! Please try again!'
+      );
     }
 
     onClose();

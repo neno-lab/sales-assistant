@@ -40,22 +40,24 @@ const CarListContainer = ({ cardId, carsList, getCars, loginProps }) => {
   }, [cardId, getCars]);
 
   const orderCar = async (carProps) => {
+    console.log('carProps: ', carProps);
     try {
       const responseOrder = await TeamDSalesAssistant.post(
         '/api/sales/order',
         {
           Car_Id: carProps.Car_Id,
-          Car_Name: carProps.carName,
-          Model_Type: carProps.modelType,
-          Color_Type: carProps.colorType,
-          Equipment_Type: carProps.equipmentType,
-          FuelType: carProps.fuelType,
-          Engine: carProps.engine,
-          PowerInHp: carProps.powerInHp,
-          AvgConsumption: carProps.avgConsumption,
-          Car_Price: carProps.carPrice,
-          IsOrdered: true,
-          IsOrderComplete: true,
+          Car_Name: carProps.Car_Name,
+          Model_Type: carProps.Model_Type,
+          Color_Type: carProps.Color_Type,
+          Equipment_Type: carProps.Equipment_Type,
+          FuelType: carProps.FuelType,
+          Engine: carProps.Engine,
+          PowerInHp: carProps.PowerInHp,
+          AvgConsumption: carProps.AvgConsumption,
+          Car_Price: carProps.Car_Price,
+          IsOrdered: carProps.IsOrdered,
+          IsOrderComplete: carProps.IsOrderComplete,
+          ImagePath: carProps.ImagePath,
         },
         config
       );
